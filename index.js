@@ -1,6 +1,14 @@
 const app = require('./express')
 const port = 3000
-require('./routes');
+const { requireAllRoutes } = require('./routes');
+
+requireAllRoutes();
+
+
+app.all('*', ( req, res )=>{
+  res.send('Not found!')
+});
+
 
 
 app.listen(port, () => {

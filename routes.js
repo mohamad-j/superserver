@@ -1,27 +1,28 @@
-const app = require('./express')
-
-app.get('/', (req, res) => {
-    
-    res.render("templates/home");
-})
-
-app.get('/about', ( req, res )=>{
-    res.send('Hello About!')
-})
+const path = require('path');
+const fs = require('fs');
 
 
-app.post('/about', ( req, res )=>{
-    res.send('Hello About!')
-})
+function requireAllRoutes()
+{
+    /// Find all js files inside tha allroutes folder
+    // Then require them.
+    let d = __dirname;
+    console.log(' d : ', d);
 
-app.all('/login', ( req, res )=>{
-    res.send( `<h1>Logi</h1>`)
-})
+    console.log(' __dirname : ', __dirname);
 
-app.get('/user/:userlast?', ( req, res )=>{
-    res.send('USER !'+ req.params.userlast)
-})
+  
+  let routes = path.join( d, "allroutes" );
 
-app.all('*', ( req, res )=>{
-    res.send('Not found!')
-})
+  const routes_files = fs.readdirSync( routes );
+
+  if( routes_files ) {
+    routes_files.forEach( _f=>{
+          console.log("_f : ", _f );
+          require( `${routes}/${ _f.split('.')[0] }` );
+      });
+  }
+}
+
+
+module.exports = { requireAllRoutes }

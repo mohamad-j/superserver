@@ -6,6 +6,7 @@ const fs = require('fs');
 
 //setting view engine to ejs
 app.set("view engine", "ejs");
+/// res.render
 
 
 module.exports = app;
