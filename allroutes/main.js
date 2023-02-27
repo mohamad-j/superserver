@@ -1,12 +1,24 @@
 const app = require('../express')
 
 app.get('/', (req, res) => {
-    
-    res.render("templates/home");
+    let user = {
+        email:"email",
+        name: "Moha"
+    }
+    res.render("templates/home", {name: "name", title: "My home", user: user});
 })
 
 app.get('/about', ( req, res )=>{
-    res.render("templates/about");
+    app.set( 'layout', './layouts/test' );
+
+    res.render("templates/about" , {name: "name", title: "My home"});
+})
+
+
+app.get('/names', ( req, res )=>{
+    app.set( 'layout', './layouts/test' );
+    
+    res.render("templates/about" , {name: "name", title: "My home"});
 })
 
 app.get('/products', ( req, res )=>{
