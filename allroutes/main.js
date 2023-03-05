@@ -1,44 +1,29 @@
-const app = require('../express')
+const app = require("../express");
+const { createRouteFunc } = require("../createRoute");
 
-app.get('/', (req, res) => {
-    let user = {
-        email:"email",
-        name: "Moha"
-    }
-    res.render("templates/home", {name: "name", title: "My home", user: user});
-})
+const routes = [
+  {
+    path: "/",
+    title: "My home",
+    template: "templates/home",
+    data: { user: { email: "email", name: "Moha" } },
+  },
+  { path: "/about", title: "About", template: "templates/about", data: {} },
+  {
+    path: "/names",
+    title: "Names",
+    template: "templates/names",
+    data: { user: { email: "email", name: "Kamil", address: "Norway" } },
+  },
+  {
+    path: "/products",
+    title: "Products",
+    template: "templates/products",
+    data: {},
+  },
+];
 
-app.get('/about', ( req, res )=>{
-    app.set( 'layout', './layouts/test' );
-
-    res.render("templates/about" , {name: "name", title: "My home"});
-})
-
-
-app.get('/names', ( req, res )=>{
-    app.set( 'layout', './layouts/test' );
-    
-    res.render("templates/about" , {name: "name", title: "My home"});
-})
-
-app.get('/products', ( req, res )=>{
-    res.render("templates/products");
-})
-
-
-// app.post('/about', ( req, res )=>{
-//     res.send('Hello About!')
-// })
-
-// app.all('/login', ( req, res )=>{
-//     res.send( `<h1>Logi</h1>`)
-// })
-
-// app.get('/user/:userlast?', ( req, res )=>{
-//     res.send('USER !'+ req.params.userlast)
-// })
-
-
-
-
-
+for (let route of routes) {
+  const { template, data, title } = route;
+  app.get(route.path, createRouteFunc(template, title, { data }));
+}
