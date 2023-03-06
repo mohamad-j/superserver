@@ -6,7 +6,7 @@ app.use(expressLayouts);
 
 //setting view engine to ejs
 app.set("view engine", "ejs");
-/// TODO set defsult layout
+/// TODO set default layout
 app.set( 'layout', './layouts/default' );
 
 module.exports = app;

@@ -8,3 +8,16 @@ app.get('/moha', ( req, res )=>{
     // DO some 
     res.json({"messag":"HEI"});
 })
+
+app.get('/products', ( req, res )=>{
+    // Run some code here
+
+    // Return the result
+    res.json({"messag":"HEI"});
+})
+
+
+function getName()
+{
+
+}
